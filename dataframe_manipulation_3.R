@@ -7,9 +7,6 @@ library(tidyr)
 
 mydf <- mydf
 
-
-
-
 ## bir df içindeki kolonlardan birinin içinde bulunan faktörlerin listesi
 listOfAllFunds <- levels(factor(mydf$fund)) 
 
