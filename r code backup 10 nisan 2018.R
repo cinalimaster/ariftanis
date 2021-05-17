@@ -1,3 +1,5 @@
+#this code written for educational purposes may not work on you because of missing packages/input files
+
 ### latest R code backup 10 nisan 2018
 
 
@@ -12,12 +14,12 @@ index <- sample(1:nrow(iris), round(proportion*nrow(iris))) #datayi %80 %20 bole
 
 
 m <- as.matrix(iris[index, ]) 
-na.omit(m)#missing data ayýklama
+na.omit(m)#missing data ayÄ±klama
 train_iris <- m
 train_iris <- as.data.frame(train_iris)
 na.omit(train_iris)
 train_iris <- iris[index, ]
-View(train_iris) #training df parçasýný olusturduk
+View(train_iris) #training df parÃ§asÄ±nÄ± olusturduk
 train_iris$x001[is.na(train_iris$x001)] <- round(mean(train_iris$x001, na.rm = TRUE))
 train_iris$x002[is.na(train_iris$x002)] <- round(mean(train_iris$x002, na.rm = TRUE))
 train_iris$x003[is.na(train_iris$x003)] <- round(mean(train_iris$x003, na.rm = TRUE))
@@ -80,7 +82,7 @@ summary(train_iris)
 View(train_iris)
 
 
-test_iris <- iris[-index, ] #testing df parçasýný oluþturduk
+test_iris <- iris[-index, ] #testing df parÃ§asÄ±nÄ± oluÅŸturduk
 
 NROW(train_iris)
 NROW(test_iris)
@@ -94,11 +96,11 @@ iris_n <- neuralnet(x001~x002+x003+x004+x005+x006+x007+x008+x009+x010+
                     stepmax=1e4, threshold = 0.1, algorithm = "rprop+", err.fct = "sse")
 plot(iris_n) #neural network fitting code
 
-pred_test <- compute(iris_n,test_iris[,2:8]) # predictionlarýmýzý test ediyoruz
-predtestResult <- pred_test$net.result # predictionlarýmýzý kaydediyoruz
-predtestResult <- as.data.frame(predtestResult) # predictionlarýmýzý kaydediyoruz sonra df yapýyoruz
+pred_test <- compute(iris_n,test_iris[,2:8]) # predictionlarÄ±mÄ±zÄ± test ediyoruz
+predtestResult <- pred_test$net.result # predictionlarÄ±mÄ±zÄ± kaydediyoruz
+predtestResult <- as.data.frame(predtestResult) # predictionlarÄ±mÄ±zÄ± kaydediyoruz sonra df yapÄ±yoruz
 
-colnames(predtestResult)<-("x001e") # tahmin df'in kolon ismini deðiþtirdik
+colnames(predtestResult)<-("x001e") # tahmin df'in kolon ismini deÄŸiÅŸtirdik
 
 predtestResult <- ceiling(predtestResult)
 
