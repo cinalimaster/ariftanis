@@ -1,3 +1,5 @@
+#this file written for educational purposes includes codes for turkish latex characters and additional info 
+
 http://asuyatuyolar.org/2011/05/latexde-turkce-karakter-kodlar.html
 
 https://www.sharelatex.com/templates/thesis/phd-thesis-of-university-of-oxford
@@ -10,8 +12,8 @@ https://www.sharelatex.com/templates/thesis/phd-thesis-of-university-of-oxford
 %load any additional packages
 \usepackage{amssymb}
 %for turkish fonts support
-\usepackage[turkish]{babel} %Türkçe bölüm isimleri
-\usepackage[utf8]{inputenc} %Türkçe karakterler
-\usepackage[T1]{fontenc} %Türkçe heceleme
+\usepackage[turkish]{babel} %TÃ¼rkÃ§e bÃ¶lÃ¼m isimleri
+\usepackage[utf8]{inputenc} %TÃ¼rkÃ§e karakterler
+\usepackage[T1]{fontenc} %TÃ¼rkÃ§e heceleme
 \uccode `\i='235
 \lccode `\I='031
