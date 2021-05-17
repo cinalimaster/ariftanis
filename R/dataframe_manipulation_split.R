@@ -236,5 +236,27 @@ write.csv(treynordbc, file = "treynordbc.csv")
 #kolon adını değiştir
 names(treynordbc)[3]<-"treynor"
 
+#_________________________________ another part of some code_____________
+
+#uzun listeden fonları ayırma
+
+
+# Alternatively, install just tidyr:
+install.packages("tidyr")
+library(tidyr)
+
+# Or the the development version from GitHub:
+# install.packages("devtools")
+devtools::install_github("tidyverse/tidyr")
+
+
+table <- X004_fon_hisse_yogun_fonlar_cuma_gÃ_nleri_02
+
+table2 <- table %>% spread(fund_code, price)
+
+# Write CSV in R
+write.csv(table2, file = "fonlar_ayrilmis_haftalik.csv")
+                                              
+
 
 
