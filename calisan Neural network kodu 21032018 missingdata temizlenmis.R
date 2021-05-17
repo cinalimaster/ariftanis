@@ -1,3 +1,5 @@
+#this code written for educational purposes may not work on you because of missing packages/input files
+
 setwd("~/R Working Directory")
 rm(list = ls())#clear memory
 .rs.restartR()#clear memory
@@ -88,12 +90,12 @@ index <- sample(1:nrow(iris), round(proportion*nrow(iris))) #datayi %80 %20 bole
 
 
 m <- as.matrix(iris[index, ]) 
-na.omit(m)#missing data ayýklama
+na.omit(m)#missing data ayÄ±klama
 train_iris <- m
 train_iris <- as.data.frame(train_iris)
 na.omit(train_iris)
 train_iris <- iris[index, ]
-View(train_iris) #training df parçasýný olusturduk
+View(train_iris) #training df parÃ§asÄ±nÄ± olusturduk
 train_iris$x001[is.na(train_iris$x001)] <- round(mean(train_iris$x001, na.rm = TRUE))
 train_iris$x002[is.na(train_iris$x002)] <- round(mean(train_iris$x002, na.rm = TRUE))
 train_iris$x003[is.na(train_iris$x003)] <- round(mean(train_iris$x003, na.rm = TRUE))
@@ -156,8 +158,8 @@ summary(train_iris)
 View(train_iris)
 
 
-test_iris <- iris[-index, ] #testing df parçasýný oluþturduk
-test_iris <- iris #örneklemin tamamýnda test ediyoruz $$$ BUNU KULLANMA USTTEKÝ DOÐRU $$$
+test_iris <- iris[-index, ] #testing df parÃ§asÄ±nÄ± oluÅŸturduk
+test_iris <- iris #Ã¶rneklemin tamamÄ±nda test ediyoruz $$$ BUNU KULLANMA USTTEKÄ° DOÄžRU $$$
 
 NROW(train_iris)
 NROW(test_iris)
@@ -171,27 +173,27 @@ iris_n <- neuralnet(x001~x002+x003+x004+x005+x006+x007+x008+x009+x010+
                     stepmax=1e4, threshold = 0.1, algorithm = "rprop+", err.fct = "sse")
 plot(iris_n) #neural network fitting code
 
-my_list <- iris_n$weights  #listeyi içerden çekiyoruz
+my_list <- iris_n$weights  #listeyi iÃ§erden Ã§ekiyoruz
 View(my_list[[1]][[1]]) # weightlerin listesi
-weight_listesi <- my_list[[1]][[1]] # 1 in 1 i 1 in ikisi 2 nin 1 i þeklinde açýlýyor liste içeriðini data frame e çevireceðiz
+weight_listesi <- my_list[[1]][[1]] # 1 in 1 i 1 in ikisi 2 nin 1 i ÅŸeklinde aÃ§Ä±lÄ±yor liste iÃ§eriÄŸini data frame e Ã§evireceÄŸiz
 weight_listesi <- as.data.frame(weight_listesi) 
 
 
 weight_table2 <- as.data.frame(weight_table$$1)  
 
-pred_test <- compute(iris_n,test_iris[,2:57]) # predictionlarýmýzý test ediyoruz
-predtestResult <- pred_test$net.result # predictionlarýmýzý kaydediyoruz
-predtestResult <- as.data.frame(predtestResult) # predictionlarýmýzý kaydediyoruz sonra df yapýyoruz
+pred_test <- compute(iris_n,test_iris[,2:57]) # predictionlarÄ±mÄ±zÄ± test ediyoruz
+predtestResult <- pred_test$net.result # predictionlarÄ±mÄ±zÄ± kaydediyoruz
+predtestResult <- as.data.frame(predtestResult) # predictionlarÄ±mÄ±zÄ± kaydediyoruz sonra df yapÄ±yoruz
 
-colnames(predtestResult)<-("x001e") # tahmin df'in kolon ismini deðiþtirdik
+colnames(predtestResult)<-("x001e") # tahmin df'in kolon ismini deÄŸiÅŸtirdik
 View(predtestResult)
 
-write.csv(predtestResult, file = "predtestResult.csv") #predtestresult datasýný yazdýrýyoruz.
+write.csv(predtestResult, file = "predtestResult.csv") #predtestresult datasÄ±nÄ± yazdÄ±rÄ±yoruz.
 
 
 predtestResult <- ceiling(predtestResult)
 
-predtestResultC <- cut(predtestResult$x001e, breaks=c(-0.1130992, -0.0065608, 0.0897254, 0.1244106, 0.2211354, 0.6510209), labels=paste("Star", 1:5, sep=""))  ##burada dilimlere ayýrýyoruz
+predtestResultC <- cut(predtestResult$x001e, breaks=c(-0.1130992, -0.0065608, 0.0897254, 0.1244106, 0.2211354, 0.6510209), labels=paste("Star", 1:5, sep=""))  ##burada dilimlere ayÄ±rÄ±yoruz
 View(predtestResultC)
 
 
@@ -203,11 +205,11 @@ plot(iris_n, rep="best")
 library(dplyr)
 library(tidyr)
 
-est_new2 <- ceiling(est_new[,2])## 2. sütunun virgülden sonra rakamlarý kaldýrýyoruz
+est_new2 <- ceiling(est_new[,2])## 2. sÃ¼tunun virgÃ¼lden sonra rakamlarÄ± kaldÄ±rÄ±yoruz
 View(est_new)
 
 
-est_new2 <- spread(est_new, ass_n, x001e)  ##datayý tabloya dönüstürme
+est_new2 <- spread(est_new, ass_n, x001e)  ##datayÄ± tabloya dÃ¶nÃ¼stÃ¼rme
 
 write.csv(est_new2, file = "est_new2.csv")  ## save data
 
