@@ -1,3 +1,5 @@
+#this code written for educational purposes may not work on you because of missing packages/input files
+
 install.packages("tidyr")
 install.packages("dplyr")
 install.packages("neuralnet")
@@ -6,46 +8,46 @@ library(dplyr)
 library(neuralnet)
 
 ## set working directory
-setwd("~/R ÇALIŞMALARIM/r working dir")
+setwd("~/R Ã‡ALIÅMALARIM/r working dir")
 
 
-## kolonlara dağılmış Fon adlarının skorlarını tek kolonda topluyoruz
+## kolonlara daÄŸÄ±lmÄ±ÅŸ Fon adlarÄ±nÄ±n skorlarÄ±nÄ± tek kolonda topluyoruz
 testdb2 <-gather(testdb,no,"score",4:75)
 
-## bazı kolonları çıkardık
+## bazÄ± kolonlarÄ± Ã§Ä±kardÄ±k
 testdb2a <- testdb2[,-3]
 testdb2c <- testdb2[-(6233:6440),]
 
-## tarih olmayan satırları çıkarıyoruz
+## tarih olmayan satÄ±rlarÄ± Ã§Ä±karÄ±yoruz
 testdb2d <- testdb2c[-which(testdb2c$date == ""), ]
 testdb2e <- testdb2d[,-3]
 
 
-## burada performans kriterlerini sütuna gelecek şekilde matrixi uyuzun dar bir halden geniş kısa bir hale getiriyoruz
+## burada performans kriterlerini sÃ¼tuna gelecek ÅŸekilde matrixi uyuzun dar bir halden geniÅŸ kÄ±sa bir hale getiriyoruz
 testdb3 <-testdb2e %>% spread(type, score)
 
 ?write.csv
-## sonuçlarımızı csv olarak kaydettik
+## sonuÃ§larÄ±mÄ±zÄ± csv olarak kaydettik
 write.csv(testdb3, file = "E:/okul/_PHD 5-2gb/okul tez/BIG DATA/hesaplama I/testdb.csv")
 
 
 db <- testdb2y001
 
-## satır numarası olmayan matrise ID adında bir sütun oluşturup satır numaraları verdik
+## satÄ±r numarasÄ± olmayan matrise ID adÄ±nda bir sÃ¼tun oluÅŸturup satÄ±r numaralarÄ± verdik
 testdb3$ID <- seq.int(nrow(testdb3))
 y001 <- testdb3$x001
 
-## y001 değişkenini data frame haline getirdik
+## y001 deÄŸiÅŸkenini data frame haline getirdik
 y001 <- as.data.frame(y001)
 y001 <- y001[-1,]
 str(db)
 
-## convert to numeric bazı veriler factor veya string olarak tanımlanmış bunları numeric'e dönüştürüyoruz.
+## convert to numeric bazÄ± veriler factor veya string olarak tanÄ±mlanmÄ±ÅŸ bunlarÄ± numeric'e dÃ¶nÃ¼ÅŸtÃ¼rÃ¼yoruz.
 db[, c(4:66)] <- sapply(db[, c(4:66)], as.numeric)
 str(db)
 
 
-## veri olmayan eksik verisi olan satırları çıkardık.
+## veri olmayan eksik verisi olan satÄ±rlarÄ± Ã§Ä±kardÄ±k.
 db2 <- na.omit(db)
 db3 <- db
 db <- db2
@@ -127,22 +129,22 @@ write.csv(db, file = "E:/okul/_PHD 5-2gb/okul tez/BIG DATA/hesaplama I/dbnormali
 ## medv ~ crim + zen + indus + chas + nox + rm + age + dis + rad + tax + ptratio + black + Lstat
 
 
-## tüm değişken adlarını bir değişken yaptı
+## tÃ¼m deÄŸiÅŸken adlarÄ±nÄ± bir deÄŸiÅŸken yaptÄ±
 allVars <- colnames(db)  
 
-## 5. kolon ile 66. kolon isimlerini tek bir değişken olarak atadık.
+## 5. kolon ile 66. kolon isimlerini tek bir deÄŸiÅŸken olarak atadÄ±k.
 predictorVars <- colnames(db[,5:66])
 
-## X date no y001 x001 hariç tüm değişken adlarını bir değişken yaptı (bu kodu kullanmadım)
+## X date no y001 x001 hariÃ§ tÃ¼m deÄŸiÅŸken adlarÄ±nÄ± bir deÄŸiÅŸken yaptÄ± (bu kodu kullanmadÄ±m)
 predictorVars <- allVars[!allVars %in% c("X","date","no","y001","x001")] 
 
-## tüm predictor variable isimlerini arasına + yazdırdı
+## tÃ¼m predictor variable isimlerini arasÄ±na + yazdÄ±rdÄ±
 predictorVars <- paste(predictorVars, collapse ="+") 
 
-## neuralnet de kullanacağımız formülü tanımladık.
+## neuralnet de kullanacaÄŸÄ±mÄ±z formÃ¼lÃ¼ tanÄ±mladÄ±k.
 form=as.formula(paste("y001~", predictorVars, collapse = "+"))
 
-# Data Partition data mızı %30 %70 olacak şekilde rastgele böldük test ve train parçalarını oluşturduk
+# Data Partition data mÄ±zÄ± %30 %70 olacak ÅŸekilde rastgele bÃ¶ldÃ¼k test ve train parÃ§alarÄ±nÄ± oluÅŸturduk
 set.seed(222)
 ind <- sample(2, nrow(db), replace = TRUE, prob = c(0.7, 0.3))
 trainDF <- db[ind==1,]
@@ -159,22 +161,22 @@ plot(neuralModel)
 
 ?compute
 
-# Prediction burada neuralnet ile tespit ettiğimiz çarpan ve sabitleri kullanarak modeli çalıştırıp
-# bilinen değişkenleri girdi olarak verdiğimizde elde edeceğimiz tahmin'i oluşturup orjinal veri ile karşılaştırıyoruz.
+# Prediction burada neuralnet ile tespit ettiÄŸimiz Ã§arpan ve sabitleri kullanarak modeli Ã§alÄ±ÅŸtÄ±rÄ±p
+# bilinen deÄŸiÅŸkenleri girdi olarak verdiÄŸimizde elde edeceÄŸimiz tahmin'i oluÅŸturup orjinal veri ile karÅŸÄ±laÅŸtÄ±rÄ±yoruz.
 output <- compute(neuralModel, db[,5:66])
 output2 <- compute(neuralModel, db[,5:66])
 head(output$net.result)
 head(training[1,])
 
-#adding ID row to net.result satır numarası olmayan bir dataframe'e ID adında bir kolon oluşturup satır numarası verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 View(output$net.result)
 output$net.result$ID <- seq.int(nrow(testdb3))
 
-# net.result db sinin içindeki ilk 5 sütun olan "V1,X,date,no,y001,x001" sütunlarından oluşan yeni bir dataframe tanımladık.
+# net.result db sinin iÃ§indeki ilk 5 sÃ¼tun olan "V1,X,date,no,y001,x001" sÃ¼tunlarÄ±ndan oluÅŸan yeni bir dataframe tanÄ±mladÄ±k.
 totalmerged <- merge(output$net.result,db[,1:5])
 View(totalmerged)
 
-# sonuçlarımızı kaydettik
+# sonuÃ§larÄ±mÄ±zÄ± kaydettik
 write.csv(output$net.result, file = "C:/R/net.result.csv")
 write.csv(db, file = "C:/R/db.csv")
 
@@ -190,7 +192,7 @@ resultDB$X <- row.names(resultDB)
 # get histogram
 hist(resultDB$V1)
 
-# X sütunundaki bilgileri esas alarak resultDB ve db dataframelerini birleştirip total adında yeni bir dataframe oluşturduk.
+# X sÃ¼tunundaki bilgileri esas alarak resultDB ve db dataframelerini birleÅŸtirip total adÄ±nda yeni bir dataframe oluÅŸturduk.
 total <- merge(resultDB,db,by="X")
 View(total)
 
@@ -314,10 +316,10 @@ predictorVars <- paste(predictorVars, collapse ="+")
 
 
 
-## neuralnet de kullanacağımız formülü tanımladık. y001 for =========================================================RETURN BASED
+## neuralnet de kullanacaÄŸÄ±mÄ±z formÃ¼lÃ¼ tanÄ±mladÄ±k. y001 for =========================================================RETURN BASED
 form=as.formula(paste("y001~", predictorVars, collapse = "+"))
 
-# Data Partition data mızı %30 %70 olacak şekilde rastgele böldük test ve train parçalarını oluşturduk
+# Data Partition data mÄ±zÄ± %30 %70 olacak ÅŸekilde rastgele bÃ¶ldÃ¼k test ve train parÃ§alarÄ±nÄ± oluÅŸturduk
 set.seed(222)
 ind <- sample(2, nrow(db), replace = TRUE, prob = c(0.7, 0.3))
 trainDF <- db[ind==1,]
@@ -335,24 +337,24 @@ View(neuralModel)
 
 ?compute
 
-## burada bir listenin içindeki alt nesneye erişiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 myoutput2 <- neuralModel$net.result[[1]]
 myoutput2 <- as.data.frame(myoutput2)
 View(myoutput2)
 
-#adding ID row to net.result satır numarası olmayan bir dataframe'e ID adında bir kolon oluşturup satır numarası verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 myoutput2$ID <- seq.int(nrow(myoutput2))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satırını esas alarak iki dataframe i birleştirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(myoutput2,resultdb,by="ID")
 View(totalmerged)
 
 
-# sonuçlarımızı kaydettik
-write.csv(totalmerged, file = "~/R ÇALIŞMALARIM/r working dir/returnbased_Results2-20-10-5.csv")
+# sonuÃ§larÄ±mÄ±zÄ± kaydettik
+write.csv(totalmerged, file = "~/R Ã‡ALIÅMALARIM/r working dir/returnbased_Results2-20-10-5.csv")
 write.csv(db, file = "C:/R/db.csv")
 
 
@@ -369,7 +371,7 @@ resultDB$X <- row.names(resultDB)
 # get histogram
 hist(resultDB$V1)
 
-# X sütunundaki bilgileri esas alarak resultDB ve db dataframelerini birleştirip total adında yeni bir dataframe oluşturduk.
+# X sÃ¼tunundaki bilgileri esas alarak resultDB ve db dataframelerini birleÅŸtirip total adÄ±nda yeni bir dataframe oluÅŸturduk.
 total <- merge(resultDB,db,by="X")
 View(total)
 
@@ -386,10 +388,10 @@ hist(histdb$x)
 predictorVars <- c("x003","x004","x005","x006","x007","x008","x009","x010","x011","x012")
 predictorVars <- paste(predictorVars, collapse ="+") 
 
-## neuralnet de kullanacağımız formülü tanımladık. y001 for =========================================================RISK BASED
+## neuralnet de kullanacaÄŸÄ±mÄ±z formÃ¼lÃ¼ tanÄ±mladÄ±k. y001 for =========================================================RISK BASED
 form=as.formula(paste("y001~", predictorVars, collapse = "+"))
 
-# Data Partition data mızı %30 %70 olacak şekilde rastgele böldük test ve train parçalarını oluşturduk
+# Data Partition data mÄ±zÄ± %30 %70 olacak ÅŸekilde rastgele bÃ¶ldÃ¼k test ve train parÃ§alarÄ±nÄ± oluÅŸturduk
 set.seed(222)
 ind <- sample(2, nrow(db), replace = TRUE, prob = c(0.7, 0.3))
 trainDF <- db[ind==1,]
@@ -408,24 +410,24 @@ View(neuralModel)
 ?compute
 
 
-## burada bir listenin içindeki alt nesneye erişiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 myoutput2 <- neuralModel$net.result[[1]]
 myoutput2 <- as.data.frame(myoutput2)
 head(myoutput2)
 
-#adding ID row to net.result satır numarası olmayan bir dataframe'e ID adında bir kolon oluşturup satır numarası verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 myoutput2$ID <- seq.int(nrow(myoutput2))
 resultdb <- db[,7:16]
 resultdb$ID <- seq.int(nrow(db[,7:16]))
 
-# ID satırını esas alarak iki dataframe i birleştirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(myoutput2,resultdb,by="ID")
 head(totalmerged)
 
 
-# sonuçlarımızı kaydettik
-write.csv(totalmerged, file = "~/R ÇALIŞMALARIM/r working dir/riskbased_Results-20-10-5.csv")
+# sonuÃ§larÄ±mÄ±zÄ± kaydettik
+write.csv(totalmerged, file = "~/R Ã‡ALIÅMALARIM/r working dir/riskbased_Results-20-10-5.csv")
 write.csv(db, file = "C:/R/db.csv")
 
 
@@ -438,10 +440,10 @@ write.csv(db, file = "C:/R/db.csv")
 predictorVars <- c("x003","x004","x005","x006","x007","x008","x009","x010","x011","x012")
 predictorVars <- paste(predictorVars, collapse ="+") 
 
-## neuralnet de kullanacağımız formülü tanımladık. y001 for =========================================================RISK BASED
+## neuralnet de kullanacaÄŸÄ±mÄ±z formÃ¼lÃ¼ tanÄ±mladÄ±k. y001 for =========================================================RISK BASED
 form=as.formula(paste("y001~", predictorVars, collapse = "+"))
 
-# Data Partition data mızı %30 %70 olacak şekilde rastgele böldük test ve train parçalarını oluşturduk
+# Data Partition data mÄ±zÄ± %30 %70 olacak ÅŸekilde rastgele bÃ¶ldÃ¼k test ve train parÃ§alarÄ±nÄ± oluÅŸturduk
 set.seed(222)
 ind <- sample(2, nrow(db), replace = TRUE, prob = c(0.7, 0.3))
 trainDF <- db[ind==1,]
@@ -460,24 +462,24 @@ View(neuralModel)
 ?compute
 
 
-## burada bir listenin içindeki alt nesneye erişiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 myoutput2 <- neuralModel$net.result[[1]]
 myoutput2 <- as.data.frame(myoutput2)
 head(myoutput2)
 
-#adding ID row to net.result satır numarası olmayan bir dataframe'e ID adında bir kolon oluşturup satır numarası verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 myoutput2$ID <- seq.int(nrow(myoutput2))
 resultdb <- db[,7:16]
 resultdb$ID <- seq.int(nrow(db[,7:16]))
 
-# ID satırını esas alarak iki dataframe i birleştirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(myoutput2,resultdb,by="ID")
 head(totalmerged)
 
 
-# sonuçlarımızı kaydettik
-write.csv(totalmerged, file = "~/R ÇALIŞMALARIM/r working dir/riskbased_Results-20-10-5.csv")
+# sonuÃ§larÄ±mÄ±zÄ± kaydettik
+write.csv(totalmerged, file = "~/R Ã‡ALIÅMALARIM/r working dir/riskbased_Results-20-10-5.csv")
 write.csv(db, file = "C:/R/db.csv")
 
 
