@@ -1,6 +1,6 @@
 #this code written for self educational purposes may not work on you due to missing packages/input files
 
-#removing missing values and calculationg averages for columns
+#replacing missing values of each column with aritmetic averages that belongs the same column
 
 train_iris$x001[is.na(train_iris$x001)] <- round(mean(train_iris$x001, na.rm = TRUE))
 train_iris$x002[is.na(train_iris$x002)] <- round(mean(train_iris$x002, na.rm = TRUE))
