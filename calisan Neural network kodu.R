@@ -1,3 +1,5 @@
+#this code written for educational purposes may not work on you because of missing packages/input files
+
 setwd("~/R Working Directory")
 library(readxl)
 
@@ -70,8 +72,8 @@ set.seed(2) #random generator
 proportion <- 0.8 # set to split
 index <- sample(1:nrow(iris), round(proportion*nrow(iris))) #datayi %80 %20 bolen bir index olusturduk
 
-train_iris <- iris[index, ]  #training df parçasýný olusturduk
-test_iris <- iris[-index, ] #testing df parçasýný oluþturduk
+train_iris <- iris[index, ]  #training df parÃ§asÄ±nÄ± olusturduk
+test_iris <- iris[-index, ] #testing df parÃ§asÄ±nÄ± oluÅŸturduk
 
 NROW(train_iris)
 NROW(test_iris)
@@ -79,11 +81,11 @@ NROW(test_iris)
 iris_n <- neuralnet(x001~x002+x003+x004+x005+x006+x007+x008, train_iris, hidden = c(2))
 plot(iris_n) #neural network fitting code
 
-pred_test <- compute(iris_n,test_iris[,2:8]) # predictionlarýmýzý test ediyoruz
-predtestResult <- pred_test$net.result # predictionlarýmýzý kaydediyoruz
-predtestResult <- as.data.frame(predtestResult) # predictionlarýmýzý kaydediyoruz sonra df yapýyoruz
+pred_test <- compute(iris_n,test_iris[,2:8]) # predictionlarÄ±mÄ±zÄ± test ediyoruz
+predtestResult <- pred_test$net.result # predictionlarÄ±mÄ±zÄ± kaydediyoruz
+predtestResult <- as.data.frame(predtestResult) # predictionlarÄ±mÄ±zÄ± kaydediyoruz sonra df yapÄ±yoruz
 
-colnames(predtestResult)<-("x001e") # tahmin df'in kolon ismini deðiþtirdik
+colnames(predtestResult)<-("x001e") # tahmin df'in kolon ismini deÄŸiÅŸtirdik
 
 predtestResult <- ceiling(predtestResult)
 
