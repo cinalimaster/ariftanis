@@ -1,3 +1,5 @@
+#this code written for educational purposes may not work on you because of missing packages/input files
+
 # Data
 getwd()
 data <- read.csv("binary.csv", header = TRUE)
