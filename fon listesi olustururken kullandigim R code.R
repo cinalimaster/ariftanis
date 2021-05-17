@@ -1,3 +1,5 @@
+#this code written for educational purposes may not work on you because of missing packages/input files
+
 install.packages("dplyr")
 library(dplyr)
 install.packages("tidyr")
@@ -8,10 +10,10 @@ mydf <- mydf
 
 
 
-## bir df içindeki kolonlardan birinin içinde bulunan faktörlerin listesi
+## bir df iÃ§indeki kolonlardan birinin iÃ§inde bulunan faktÃ¶rlerin listesi
 listOfAllFunds <- levels(factor(mydf$fund)) 
 
-## filtering multicriteria hisse agirlikli yatirim fonlarýný suzduk
+## filtering multicriteria hisse agirlikli yatirim fonlarÄ±nÄ± suzduk
 HisseMutFunds <- filter(mydf, 
 
   fund== "XU100"|
@@ -93,7 +95,7 @@ HisseMutFunds <- filter(mydf,
 mydf2 <- HisseMutFunds[,1:3]
 
 
-##data frame uzun ince bir listeden çýkarýp assetleri ayrý ayrý tablo haline getirdik
+##data frame uzun ince bir listeden Ã§Ä±karÄ±p assetleri ayrÄ± ayrÄ± tablo haline getirdik
 mydf3 <- spread(mydf2,fund,nav)
 head(mydf3)
 
