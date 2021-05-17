@@ -1,7 +1,6 @@
+#this code written for educational purposes may not work on you because of missing packages/input files
 
-
-
-#kolon adını ilk satırla değiştirme
+#kolon adÄ±nÄ± ilk satÄ±rla deÄŸiÅŸtirme
 colnames(DF) = DF[1, ] # the first row will be the header
 DF = DF[-1, ]          # removing the first row.
 
@@ -9,7 +8,7 @@ colnames(ForRlatest) = ForRlatest[1, ]
 ForRlatest = ForRlatest[-1,]
 View
 
-#son sütunu çıkardım
+#son sÃ¼tunu Ã§Ä±kardÄ±m
 
 DF <- ForRlatest
 DF <- DF[,1:67]
@@ -36,7 +35,7 @@ DF3 <- separate(DF2, perfcrit, c("x001","x002","x003","x004","x005","x006","x007
 DF3 <- as.data.frame(t(DF2))
 
 
-#kolon adını ilk satırla değiştirme
+#kolon adÄ±nÄ± ilk satÄ±rla deÄŸiÅŸtirme
 colnames(DF3) = DF3[1, ] # the first row will be the header
 DF3 = DF3[-1, ]          # removing the first row.
 
@@ -44,7 +43,7 @@ DF3 = DF3[-1, ]          # removing the first row.
 DF4 <- gather(DF3, "year", "n", 2:4)
 
 
-#DATA FRAME i düzenledim ve neuralnet ile çalışabilir hale getirdim önce parçaladım sonra birleştireceğim
+#DATA FRAME i dÃ¼zenledim ve neuralnet ile Ã§alÄ±ÅŸabilir hale getirdim Ã¶nce parÃ§aladÄ±m sonra birleÅŸtireceÄŸim
 
 install.packages("tidyr")
 install.packages("dplyr")
@@ -221,7 +220,7 @@ betadbc <- gather(betadb, type, "beta" , 3:74)
 treynordb <- testdb[976:1170,]
 treynordbc <- gather(treynordb, type, "beta" , 3:74)
 
-#kolonları birleştirip yeni dataframe oluşturma with dplyr
+#kolonlarÄ± birleÅŸtirip yeni dataframe oluÅŸturma with dplyr
 
 
 # Write CSV in R
@@ -233,7 +232,7 @@ write.csv(stdevdbc, file = "stdevdbc.csv")
 write.csv(treynordbc, file = "treynordbc.csv")
 
 
-#kolon adını değiştir
+#kolon adÄ±nÄ± deÄŸiÅŸtir
 names(treynordbc)[3]<-"treynor"
 
 
