@@ -1,3 +1,5 @@
+#this code/script written for self educational purposes may not work on you due to missing packages/input  resource files
+
 install.packages("tidyr")
 install.packages("dplyr")
 install.packages("neuralnet")
@@ -15,7 +17,7 @@ library(readr)
 library(rlang)
 
 
-#### BURADA skorlarýn converge edip etmediðini plotlara bakarak kontrol etmeye çalýþacaðým 
+#### BURADA skorlarÄ±n converge edip etmediÄŸini plotlara bakarak kontrol etmeye Ã§alÄ±ÅŸacaÄŸÄ±m 
 
 
 
@@ -23,30 +25,30 @@ library(rlang)
 
 
 
-### gather yapmaya çalýþýyorum
+### gather yapmaya Ã§alÄ±ÅŸÄ±yorum
 
 X3MReturn$ID <- seq.int(nrow(X3MReturn))
 
 X3MReturn2 <- gather(X3MReturn, "ID","score", 2:73)
 
 # Write csv olarak kaydet
-write.csv(X3MReturn2, file = "G:/okul tez/BIG DATA/hesaplama J/3aylýkExtracted.csv")
+write.csv(X3MReturn2, file = "G:/okul tez/BIG DATA/hesaplama J/3aylÄ±kExtracted.csv")
 
 
 
 
 ### OK OK OK THIS TIME YOU GOT THIS!!!! =========================================================================
 
-### boþluklarý 0 ile dolduruyoruz.
+### boÅŸluklarÄ± 0 ile dolduruyoruz.
 X3Mdb0filled <- X3Mdb
 
 X3Mdb0filled[is.na(X3Mdb)] <- 0
 
 
-# fon skorlarýný birleþtir
+# fon skorlarÄ±nÄ± birleÅŸtir
 X3Mdb0filledGATHER <- gather(X3Mdb0filled, "no","score", 4:75)
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 X3Mdb0filledSPREAD <- X3Mdb0filledGATHER %>% spread(type, score)
 View(X3Mdb0filledSPREAD)
 
@@ -69,17 +71,17 @@ rm(X3Mdb0filled)
 library(readxl)
 X3Mdb <- read_excel("G:/okul tez/BIG DATA/hesaplama J/ultraMEGAsuper3Mdb.xlsx")
 
-### boþluklarý 0 ile dolduruyoruz.
+### boÅŸluklarÄ± 0 ile dolduruyoruz.
 X3Mdb0 <- X3Mdb
 
 X3Mdb0[is.na(X3Mdb)] <- 0
 
-# fon skorlarýný birleþtir
+# fon skorlarÄ±nÄ± birleÅŸtir
 X3Mdb0G <- gather(X3Mdb0, "no","score", 4:75)
 View(X3Mdb0G)
 
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 X3Mdb0S <- X3Mdb0G %>% spread(type, score)
 View(X3Mdb0S)
 
@@ -104,7 +106,7 @@ library(tidyr)
 library(dplyr)
 library(neuralnet)
 
-####--------------------------önce gereksiz objectleri temizleyip X3Mdb0S matrisini normalize edeceðiz-------------------------------------------------------------
+####--------------------------Ã¶nce gereksiz objectleri temizleyip X3Mdb0S matrisini normalize edeceÄŸiz-------------------------------------------------------------
 
 rm(AbsoluteRiskbased)
 rm(AbsoluteRiskbased2)
@@ -159,8 +161,8 @@ mins <- apply(Norm_X3Mdb0S, 2, min)
 
 Scaled_X3Mdb0S <- as.data.frame(scale(Norm_X3Mdb0S, center = mins, scale = maxs - mins))
 
-#merge yaparak data frameleri birleþtiriyoruz
-#iki data frame e ID kolonu atýyorum
+#merge yaparak data frameleri birleÅŸtiriyoruz
+#iki data frame e ID kolonu atÄ±yorum
 Scaled_X3Mdb0S$ID <- seq.int(nrow(Scaled_X3Mdb0S))
 X3Mdb0S$ID <- seq.int(nrow(X3Mdb0S))
 
@@ -202,18 +204,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -243,18 +245,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -281,18 +283,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -319,18 +321,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -358,18 +360,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -397,18 +399,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -436,18 +438,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -474,18 +476,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -518,18 +520,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -563,18 +565,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -603,18 +605,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -649,18 +651,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -694,18 +696,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -737,18 +739,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -779,18 +781,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -824,18 +826,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -870,18 +872,18 @@ neuralModel <- neuralnet(formula= form,
 
 plot(neuralModel)
 
-## burada bir listenin içindeki alt nesneye eriþiyoruz
+## burada bir listenin iÃ§indeki alt nesneye eriÅŸiyoruz
 output <- neuralModel$net.result[[1]]
 output <- as.data.frame(output)
 head(output)
 
-#adding ID row to net.result satýr numarasý olmayan bir dataframe'e ID adýnda bir kolon oluþturup satýr numarasý verdik.
+#adding ID row to net.result satÄ±r numarasÄ± olmayan bir dataframe'e ID adÄ±nda bir kolon oluÅŸturup satÄ±r numarasÄ± verdik.
 
 output$ID <- seq.int(nrow(output))
 resultdb <- db[,1:6]
 resultdb$ID <- seq.int(nrow(db[,1:6]))
 
-# ID satýrýný esas alarak iki dataframe i birleþtirdik 
+# ID satÄ±rÄ±nÄ± esas alarak iki dataframe i birleÅŸtirdik 
 totalmerged <- merge(output,resultdb,by="ID")
 head(totalmerged)
 
@@ -902,7 +904,7 @@ write.csv(totalmerged, file = "C:/R/stageB/All-Unclass.csv")
 
 
 
-###----------------------burada uzun csv leri fon adlarýna göre ayýrýyoruz.-------------------
+###----------------------burada uzun csv leri fon adlarÄ±na gÃ¶re ayÄ±rÄ±yoruz.-------------------
 install.packages("tidyr")
 install.packages("dplyr")
 install.packages("neuralnet")
@@ -910,7 +912,7 @@ library(tidyr)
 library(dplyr)
 library(neuralnet)
 
-## burada performans kriterlerini sütuna gelecek þekilde matrixi uyuzun dar bir halden geniþ kýsa bir hale getiriyoruz
+## burada performans kriterlerini sÃ¼tuna gelecek ÅŸekilde matrixi uyuzun dar bir halden geniÅŸ kÄ±sa bir hale getiriyoruz
 
 
 AbsoluteRiskbased2 <-AbsoluteRiskbased %>% spread(no, AbsoluteRiskbased)
@@ -939,7 +941,7 @@ library(tidyr)
 devtools::install_github("tidyverse/tidyr")
 
 
-table <- X004_fon_hisse_yogun_fonlar_cuma_gÃ_nleri_02
+table <- X004_fon_hisse_yogun_fonlar_cuma_gÃƒ_nleri_02
 
 table2 <- table %>% spread(fund_code, price)
 
@@ -948,20 +950,20 @@ write.csv(table2, file = "fonlar_ayrilmis_haftalik.csv")
 
 
 
-##### ----------------- burada taslak kodu seri çalýþacak hale getiriyorum GATHER SPREAD   STAGE 3 NOT EDITED
+##### ----------------- burada taslak kodu seri Ã§alÄ±ÅŸacak hale getiriyorum GATHER SPREAD   STAGE 3 NOT EDITED
 
 library(readr)
 
 ###DIFMARKET COND
 
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 DifMarketCondbased <- read_csv("C:/R/DifMarketCondbased.csv")
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 DifMarketCondbased2 <-DifMarketCondbased [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 DifMarketCondbased3 <-DifMarketCondbased2 %>% spread(no, DifMarketCondbased)
 View(DifMarketCondbased3)
 
@@ -975,13 +977,13 @@ rm(DifMarketCondbased3)
 ###EXTREME MARKET COND
 
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 ExtrMarkCondbased <- read_csv("C:/R/ExtrMarkCondbased.csv")
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 ExtrMarkCondbased2 <-ExtrMarkCondbased [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 ExtrMarkCondbased3 <-ExtrMarkCondbased2 %>% spread(no, ExtrMarkCondbased)
 View(ExtrMarkCondbased3)
 
@@ -997,13 +999,13 @@ rm(ExtrMarkCondbased3)
 ###GENERAL BENCHMARK BASED
 
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 GeneralBenchbased <- read_csv("C:/R/GeneralBenchbased.csv")
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 GeneralBenchbased2 <-GeneralBenchbased [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 GeneralBenchbased3 <-GeneralBenchbased2 %>% spread(no, GeneralBenchbased)
 View(GeneralBenchbased3)
 
@@ -1016,13 +1018,13 @@ rm(GeneralBenchbased3)
 
 ###PORTFOLIO MANAGER BASED
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 PortManagerbased <- read.csv("C:/R/PortManagerbased.csv")
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 PortManagerbased2 <- PortManagerbased [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 PortManagerbased3 <- PortManagerbased2 %>% spread(no, PortManagerbased)
 View(PortManagerbased3)
 
@@ -1035,13 +1037,13 @@ rm(PortManagerbased3)
 
 ###RETURN BASED
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 returnbased <- read.csv("C:/R/returnbased.csv", header=TRUE)
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 returnbased2 <- returnbased [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 returnbased3 <- returnbased2 %>% spread(no, returnbased)
 
 # Write csv olarak kaydet
@@ -1054,13 +1056,13 @@ rm(returnbased3)
 
 ###RISK BASED
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 riskbased <- read_csv("C:/R/riskbased.csv")
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 riskbased2 <- riskbased [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 riskbased3 <- riskbased2 %>% spread(no, riskbased)
 
 # Write csv olarak kaydet
@@ -1073,13 +1075,13 @@ rm(riskbased3)
 
 ###UNCLASSIFIED BASED
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 unclassifiedbased <- read_csv("C:/R/unclassifiedbased.csv")
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 unclassifiedbased2 <- unclassifiedbased [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 unclassifiedbased3 <- unclassifiedbased2 %>% spread(no, unclassifiedbased)
 
 # Write csv olarak kaydet
@@ -1091,13 +1093,13 @@ rm(unclassifiedbased3)
 
 ###UNCLASSIFIED BASED
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 unclassifiedbased <- read_csv("C:/R/unclassifiedbased.csv")
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 unclassifiedbased2 <- unclassifiedbased [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 unclassifiedbased3 <- unclassifiedbased2 %>% spread(no, unclassifiedbased)
 
 # Write csv olarak kaydet
@@ -1110,13 +1112,13 @@ rm(unclassifiedbased3)
 
 ###ABSOLUTE RISK BASED
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 AbsoluteRiskbased <- read.csv("C:/R/AbsoluteRiskbased.csv")
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 AbsoluteRiskbased2 <- AbsoluteRiskbased [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 AbsoluteRiskbased3 <- AbsoluteRiskbased2 %>% spread(no, AbsoluteRiskbased)
 
 # Write csv olarak kaydet
@@ -1129,13 +1131,13 @@ rm(AbsoluteRiskbased3)
 
 ###ALL VARS BASED
 
-# csv den R ortamýna import et
+# csv den R ortamÄ±na import et
 Allv <- read.csv("C:/R/stageB/allvarsincluded.csv")
 
-# gereksiz satýrlarý çýkar
+# gereksiz satÄ±rlarÄ± Ã§Ä±kar
 Allv2 <- Allv [,c(-1,-2,-4,-7,-8,-9)]
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 Allv3 <- Allv2 %>% spread(no, allvarsincluded)
 
 # Write csv olarak kaydet
@@ -1149,7 +1151,7 @@ rm(Allv3)
 
 ### paired sample t-test stage
 
-# önce tüm datalarý tek bir DF te toplayacaðýz
+# Ã¶nce tÃ¼m datalarÄ± tek bir DF te toplayacaÄŸÄ±z
 
 All_difMarket <- read_csv("C:/R/stageB-for 2 sample T test/All-difMarket.csv")
 All_ExtMarket <- read_csv("C:/R/stageB-for 2 sample T test/All-ExtMarket.csv")
@@ -1161,7 +1163,7 @@ All_GenBench <- read_csv("C:/R/stageB-for 2 sample T test/All-GenBench.csv")
 All_PortMan <- read_csv("C:/R/stageB-for 2 sample T test/All-PortMan.csv")
 All <- read_csv("C:/R/stageB-for 2 sample T test/All.csv")
 
-# birinci kolonu çýkarýyoruz
+# birinci kolonu Ã§Ä±karÄ±yoruz
 All <- All[,-1]
 All_difMarket <- All_difMarket[,-1]
 All_ExtMarket <- All_ExtMarket[,-1]
@@ -1174,7 +1176,7 @@ All_AbsRisk <- All_AbsRisk[,-1]
 
 All <- All[,c(-3,-6,-7,-8)]
 
-#2. turda burayý kullanmayýp hepsinin düz 2. kolonunu almayý deneyeceðim /// iþe yaramadý
+#2. turda burayÄ± kullanmayÄ±p hepsinin dÃ¼z 2. kolonunu almayÄ± deneyeceÄŸim /// iÅŸe yaramadÄ±
 
 All_difMarket <- All_difMarket[,-3:-8]
 All_ExtMarket <- All_ExtMarket[,-3:-8]
@@ -1189,7 +1191,7 @@ All_AbsRisk <- All_AbsRisk[,-3:-8]
 ## example code total <- merge(data frameA,data frameB,by="ID")
 
 
-## data frameleri birleþtiriyoruz
+## data frameleri birleÅŸtiriyoruz
 
 
 All <- merge(All_difMarket, All, by="ID")
@@ -1201,7 +1203,7 @@ All  <- merge(All_GenBench, All, by="ID")
 All  <- merge(All_PortMan, All, by="ID")
 All  <- merge(All_AbsRisk, All, by="ID")
 
-## birleþtirdik þimdi paired sample t test e baþlýyoruz
+## birleÅŸtirdik ÅŸimdi paired sample t test e baÅŸlÄ±yoruz
 
 names(All)
 
@@ -1210,7 +1212,7 @@ names(All)
 
 
 
-## histogramlara bakalým
+## histogramlara bakalÄ±m
 
 hist(All$allvarsExAbsRisk)
 hist(All$allvarsExPortMan)
@@ -1280,7 +1282,7 @@ stat.desc(allvarsincluded)
 
 
 
-## paired sample T-TEST yapýyoruz
+## paired sample T-TEST yapÄ±yoruz
 
 # paired t-test example code  t.test(y1,y2,paired=TRUE) # where y1 & y2 are numeric
 
@@ -1322,7 +1324,7 @@ t.test(allvarsincluded,allvarsincluded,paired=TRUE)
 
 
 
-##====================================================== boþ yerlere 0 verdiðim sonuçardan þüphelendim bir de boþ deðerleri çýkararak deneyeceðim=========
+##====================================================== boÅŸ yerlere 0 verdiÄŸim sonuÃ§ardan ÅŸÃ¼phelendim bir de boÅŸ deÄŸerleri Ã§Ä±kararak deneyeceÄŸim=========
 #unclass 74
 #extrememarketcond 186
 #absoluteriskbased 182
@@ -1335,20 +1337,20 @@ t.test(allvarsincluded,allvarsincluded,paired=TRUE)
 
 db_yedek <- db
 
-## 0 olan deðerleri NA yaptýk
+## 0 olan deÄŸerleri NA yaptÄ±k
 db[db == 0] <- NA
 
 
-## Boþ satýrlarý siliyoruz
+## BoÅŸ satÄ±rlarÄ± siliyoruz
 library(tidyr)
 df %>% drop_na()
 
 
 
-# fon skorlarýný birleþtir
+# fon skorlarÄ±nÄ± birleÅŸtir
 X3MdbGATHER <- gather(X3Mdb, "no","score", 4:75)
 
-# fon türlerine göre daðýt
+# fon tÃ¼rlerine gÃ¶re daÄŸÄ±t
 X3MdbSPREAD <- X3MdbGATHER %>% spread(type, score)
 View(X3MdbSPREAD)
 
@@ -1358,7 +1360,7 @@ View(X3MdbSPREAD)
 write.csv(X3MdbSPREAD, file = "C:/R/X3MdbSPREAD.csv")
 
 
-### normalize ediyoruz /// bu tam çalýþmadý anlayamadým
+### normalize ediyoruz /// bu tam Ã§alÄ±ÅŸmadÄ± anlayamadÄ±m
 
 Norm_X3Mdb <- X3MdbSPREAD[,3:66]
 
@@ -1376,12 +1378,12 @@ lst <- lapply(X3Mdb[-1], function(x) round((x-min(x))/(max(x)-min(x)), 1))
 res <- cbind(X3Mdb[1], do.call(cbind.data.frame, Map(cbind , X3Mdb[-1], lst)))
 names(res)[-1] <- rbind(names(X3Mdb)[-1], sub("Value", "Norm", names(X3Mdb)[-1]))
 
-### Excel in STANDARDÝZE FONKSÝYONU ÝLE NORMALÝZE EDECEÐÝM
+### Excel in STANDARDÄ°ZE FONKSÄ°YONU Ä°LE NORMALÄ°ZE EDECEÄžÄ°M
 
 
 
-#merge yaparak data frameleri birleþtiriyoruz
-#iki data frame e ID kolonu atýyorum
+#merge yaparak data frameleri birleÅŸtiriyoruz
+#iki data frame e ID kolonu atÄ±yorum
 X3Mdb$ID <- seq.int(nrow(X3Mdb))
 Scaled_X3MdbSPREAD$ID <- seq.int(nrow(Scaled_X3MdbSPREAD))
 
