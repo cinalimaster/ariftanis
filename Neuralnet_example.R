@@ -7,7 +7,6 @@ library(tidyr)
 install.packages("EDAWR")
 library(EDAWR)
 
-
 na.omit(bigdf)
 bigdf <- bigdf[1:10,]
 install.packages("neuralnet")
@@ -26,16 +25,6 @@ library(neuralnet)
 n <- names(train_)
 f <- as.formula(paste("medv ~", paste(n[!n %in% "medv"], collapse = " + ")))
 nn <- neuralnet(f,data=train_,hidden=c(5,3),linear.output=T)
-
-
-
-
-
-
-
-
-
-
 
 train_bigdf <- scaled[index, ]
 na.omit(train_bigdf)
