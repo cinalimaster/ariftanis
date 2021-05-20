@@ -10,7 +10,7 @@ print(my_num) #print your variable number
 
 print(str(my_num)) #converts your number variable into string variable
 
-print(str(my_num) + " is my favorite number") #rints succesfully
+print(str(my_num) + " is my favorite number") #prints "5 is my favorite number" sentence
 
 # print(my_num + " is my favorite number") #this will give an error
 
