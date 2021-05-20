@@ -1,13 +1,13 @@
 lucky_numbers = [4, 8 ,15, 16, 23, 42]
 friends = ["Kevin", "Karen", "Jim", "Jim", "Oscar", "Toby", ]
 
-friends.extend(lucky_numbers) # it extends the list by adding another list
+friends.extend(lucky_numbers) # it extends the friends list by adding lucky_numbers list
 print(friends)
 
 lucky_numbers = [4, 8 ,15, 16, 23, 42]
 friends = ["Kevin", "Karen", "Jim", "Oscar", "Toby", ]
 
-friends.append("Creed") # it only adds a single variable at the end of your list
+friends.append("Creed") # it only adds a single variable at the end of friends list
 print(friends)
 
 friends.insert(1, "Kelly") # adds Kelly to position 1 and other variables pushed to right
