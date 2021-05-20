@@ -1,7 +1,7 @@
 #Tuple is a data container similar to list like coordinates
 
 coordinates = (4, 5) # tuple's immutable <you cant change or edit them>
-print(coordinates[0]) # prints 4 first element inside tuple int this case it will give you (4, 5)
+print(coordinates[0]) # prints "4" the first element inside tuple
 
 #if you try this you will get an error
 coordinates = (4, 5) # tuple's immutable <you cant change or edit them>
