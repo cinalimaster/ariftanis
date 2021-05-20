@@ -41,6 +41,8 @@ SELECT NAME
 FROM skating
 WHERE country = 'pl';
 
+# this process is similar in math set A ∩ B 
+
 # EXCEPT
 
 # returns only the rows appear in the first but don't appear in the second table/db
@@ -54,5 +56,5 @@ SELECT name
 FROM skating
 WHERE country='de'
 
-
+# this process is similar in math set A \ B 
 
