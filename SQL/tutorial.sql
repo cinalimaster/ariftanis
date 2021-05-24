@@ -43,4 +43,99 @@ SELECT * FROM bands LIMIT 2;  -- we access  only first 2 rows from bands bands t
 SELECT name FROM bands; -- we select name colum from bands table
 SELECT id AS 'ID', name AS 'Band Name' FROM bands; -- we select id and name columns from bands table and assign them a new column names
 
+SELECT * FROM bands ORDER BY name; -- we select name colum from bands table and and order by name alphabetically
+INSERT INTO albums (name, release_year, band_id)
+VALUES  ('The Number of the Beast', '1985', '1'),
+        ('Power Slave', '2018', '2'),
+        ('Nightmare', '2018', '2'),
+        ('Nightmare', '2010', '3'),
+        ('Test album', 'NULL', '3');
+        
+SELECT * FROM album; -- select everything from albums
+
+SELECT name FROM albums; -- select only name column from albums
+
+SELECT DISTINCT name FROM albums; -- select only name column from albums and don't show repeating values
+
+UPDATE albums
+SET release_year = 1982
+WHERE id = 1;  
+/*we update table and assign new release_year value as 1982 
+where id number equals 1 'The Number of the Beast'...row */
+
+SELECT * FROM albums
+WHERE release_year < 2000; -- display only albums release_year lower than 2000
+
+SELECT * FROM albums
+WHERE name LIKE '%er%' OR band_id = 2;  -- display only albums name column value includes ..er.. or band_id = 2 
+
+SELECT * FROM albums
+WHERE release_year = 1984 AND band_id = 1 -- display rows only release_year = 1 and band_id=1
+
+SELECT * FROM albums
+WHERE release_year BETWEEN 2000 AND 2018 --display rows only release_year between 2000<->2018
+
+SELECT * FROM albums
+WHERE release_year IS NULL; --display rows only release_year is empty
+
+DELETE FROM albums WHERE id = 5; -- delete id row 5
+
+SELECT * FROM albums; -- check rows row 5 is deleted
+
+SELECT * FROM bands
+JOIN albums ON bands.id = albums.band_id -- we join albums table and bands table with matching bonds.id=albums.band_id (unmatching rows excluded)
+
+SELECT * FROM bands
+INNER JOIN albums ON bands.id = albums.band_id -- INNER JOIN returns only both side matching rows (unmatching rows excluded)
+
+SELECT * FROM bands
+LEFT JOIN albums ON bands.id = albums.band_id -- LEFT JOIN returns all left side matching rows (rightside unmatching rows returns NULL)
+
+SELECT * FROM albums
+RIGHT JOIN bands ON bands.id = albums.band_id -- RIGHT JOIN returns all right side matching rows (leftside unmatching rows returns NULL)
+
+SELECT AVG(release_year) FROM albums; -- shows average release_year (float) from albums table
+
+SELECT SUM(release_year) FROM albums; -- shows sum of release_year (float) from albums table
+
+SELECT band_id, COUNT(band_id) FROM albums
+GROUP BY band_id; -- count band_id and show how many band id and display by band_id
+
+SELECT b.name AS band_name, COUNT(a.id) AS num_albums
+FROM band AS b
+LEFT JOIN albums AS a ON b.id = a.band_id
+GROUP BY b.id;
+/* counts number of albums for each every band_name
+band_name     num_albums
+Iron Maiden   2
+Deuce         1
+Avenged Sev.. 1
+Anker         0
+*/
+
+SELECT b.name AS band_name, COUNT(a.id) AS num_albums
+FROM band AS b
+LEFT JOIN albums AS a ON b.id = a.band_id
+WHERE num_albums
+GROUP BY b.id
+HAVING num_albums =1;
+/* counts number of albums for each every band_name (shows only album_number is equal to 1)
+band_name     num_albums
+Deuce         1
+Avenged Sev.. 1
+*/
+
+SELECT b.name AS band_name, COUNT(a.id) AS num_albums
+FROM band AS b
+LEFT JOIN albums AS a ON b.id = a.band_id
+WHERE b.name = 'Deuce'
+GROUP BY b.id
+HAVING num_albums =1;
+/* counts number of albums for each band_name='Deuce' (shows only album_number is equal to 1)
+band_name     num_albums
+Deuce         1
+*/
+
+
+
 
