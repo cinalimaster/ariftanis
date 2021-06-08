@@ -1,3 +1,6 @@
 https://www.kaggle.com/
 
 Kaggle offers a no-setup, customizable, Jupyter Notebooks environment. Access free GPUs and a huge repository of community published data & code.
+
+230+ ML projects with python [MUST HAVE]
+https://medium.com/coders-camp/230-machine-learning-projects-with-python-5d0c7abf8265
