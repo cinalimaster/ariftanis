@@ -151,6 +151,6 @@ results_personnal_care.head()
 2- average total spend ~ 1,252 USD
 3- registered with the company for approx 21 months
 4- has graduate degree
-5- who has also heavy meat consumers
+5- who has also heavy meat consumers """
 
 
