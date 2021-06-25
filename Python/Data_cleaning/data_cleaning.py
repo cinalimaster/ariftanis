@@ -37,3 +37,29 @@ deads = tree_census_subset[tree_census_subset['status']=='Dead']
 deads
 
 tree_problems.apply(pd.Series.value_counts)
+
+tree_census_subset = tree_census_subset[tree_census_subset['status'] != 'Stump']
+tree_census_subset = tree_census_subset[tree_census_subset['status'] != 'Dead']
+
+#check health condition Good Fair Poor...
+tree_census_subset['health'].value_counts()
+
+# create a mask to select only rows fill tree status stump or dead
+mask = ((tree_census_subset['status'] == 'Stump') | (tree_census_subest['status'] =='Dead'))
+# now select the column
+tree_census_subset.loc[mask, 'health'] = tree_census_subset.loc[mask, 'health'].fillna('Not Applicable')
+
+
+tree_census_subset[tree_census_subset['status'] == 'Stump']
+# fill missing valuables Na with our criterie
+tree_census_subset.fillna('Not Applicable')
+
+# you can use alternative way as don't specify column to fill all NaN values in selected rows as Not Applicable
+tree_census_subset.loc[mask] = tree_census_subset.loc[mask].fillna('Not Applicable')
+
+# check if there any other missing values
+tree_census_subset.isna().sum()
+
+tree_census_subset[tree_census_subset['health'].isna()]
+
+# change 
