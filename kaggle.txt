@@ -8,6 +8,9 @@ https://medium.com/coders-camp/230-machine-learning-projects-with-python-5d0c7ab
 MANAGEMENT ENGINEERING JOURNALS
 https://www.sciencedirect.com/journal/journal-of-management-science-and-engineering
 
+PYTHON INTERMEDIATE BOOK
+https://ia801305.us.archive.org/26/items/IntermediatePython/IntermediatePython.pdf
+
 
 Social and Economic Modeling
 Complex Management and Economic Systems
