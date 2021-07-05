@@ -215,4 +215,90 @@ while True:
 print('Thank you!, George')    
   
 
+# Continue Statements
 
+while True:
+  print('Who are you?')
+  name = input()
+  if name != 'Joe':
+    continue
+  print('Hello, Joe. What is the password? (It is a fish.)')
+  password = input()
+  if password == 'swordfish':
+    break
+print('Access granted.')
+
+# for Loops and the range() Function
+
+>>> print('My name is')
+>>> for i in range(5):
+>>>   print('Jimmy Five Times ({})'.format(str(i)))
+My name is
+Jimmy Five Times (0)
+Jimmy Five Times (1)
+Jimmy Five Times (2)
+Jimmy Five Times (3)
+Jimmy Five Times (4)
+
+# notice that when we define range it doesn't contain number of 10
+>>> for i in range(0, 10, 2):
+>>>   print(i)
+0
+2
+4
+6
+8
+
+# another for loop example loops backwards notice that -1 doesn't included
+>>> for i in range(5, -1, -1): # range(limit1,limit2, iteration)
+>>>   print(i)
+5
+4
+3
+2
+1
+0
+
+# For else statement only occur if break statement occur in the loop
+>>> for i in [1, 2, 3, 4, 5]:
+>>>   if i == 3:
+>>>     break
+>>> else:
+>>>   print('only executed when no item of the list is equal to 3')
+
+# importing modules
+import random # we import random function
+for i in range(5): # when not defined starts index from 0,1,2,3,4  
+  print(random.randint(1,10) # this randit function includes limits it can print 1 or 10
+            
+# import other modules
+
+import random, sys, os, math # importing multiple modules this can be pythons own embedded modules
+        
+# import library
+from random import *
+        
+# ending a program early
+        
+import sys
+        
+while True:
+        print('Type exit to exit.')
+        response = input()
+        if response == 'exit':
+          sys.exit()
+        print('You typed {}.'.format(response))
+        
+# Functions
+
+>>> def hello(name): # we define a function called hello and variable called name
+>>>   print('Hello {}'.format(name)) # we define what function does here
+>>>
+>>> hello('Alice')
+>>> hello('Bob')
+Hello Alice
+Hello Bob
+        
+        
+
+# Return Values and Return Statements
