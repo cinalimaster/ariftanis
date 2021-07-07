@@ -125,8 +125,63 @@ a[0:2]     # selects row items at index 0 to 1 "notice 2 not included" which is 
                
 # [1.5, 2, 3]
 # [6  , 7, 4] 
-b[0:2,1]   # selects row items at index 0 to 1 "notice 2 not included" which is [1,2] 
-         
+b[0:2,1]   # selects row items at index 0 to 1 "notice 2 not included" which is 2 and 7
+
+# [1.5, 2, 3]
+# [6  , 7, 4]
+b[:1] # returns all variables from first row which is array([[1.5, 2, 3]]) equivalent to b[0:1, :]
+
+c[1,...] # returns all variables from second row which is array([[6, 7, 4]])) equivalent to [1,:,:]
+               
+# reversed array
+a[: : -1] # returns array([3, 2, 1])
+
+# boolean indexing
+a[a<2] # selects element from a which are less than 2
+
+# fancy indexing
+b[[1, 0, 1, 0],[0, 1, 2, 0] # selects 4 elements like-wise row and column index number
+
+b[[1, 0, 1, 0]][:,[0,1,2,0]] # selects a subset of matrix's rows and columns
+
+# array manipulation
+
+# transpose
+i = np.transpose (b) 
+i.T
+
+# changeing array shape
+b.ravel() # flattens the array
+g.reshape(3,-2) # reshapes array but don't changes data
+
+# adding removing elements
+h.resize((2, 6)) # retunrs a new array with (2,6) shape
+np.append(h, g) # append items to h array from g array
+np.insert(a, 1, 5) # insert item into array to certain row column
+np.delete(a,[1]) # delete items from an array
+
+# Combining Arrays
+np.concatenate((a, d), axis=0) # concatenate arrays
+
+# stacking arrays vertically (row-wise)
+np.vstack((a,b))
+np.r_[e, f]
+
+# stack arrays (column-wise)
+np.hstack((e, f))
+
+# create stacked column-wise arrays
+np.column_stack((a, d))
+np.c_[a, d]
+
+# splitting arrays horizontally at the 3rd index
+np.hsplit(a,3)
+
+# splitting array vertically at the 2nd index
+np.vsplit(c,2)
+
+
+          
          
          
          
