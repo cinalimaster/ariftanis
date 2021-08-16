@@ -136,6 +136,188 @@ band_name     num_albums
 Deuce         1
 */
 
+/* THIS IS FROM ANOTHER TUTORIAL MAIN SELECT QUERY */
+/* 
+https://raw.githubusercontent.com/socratica/sql/master/earthquake.csv */
+
+SELECT *  /* SELECT column1, columN2, ... */
+FROM earthquake  /* FROM table1 */
+WHERE occured_on >= '2010-01-01' AND occured_on <= '2010-12-31'   /* WHERE condition1, AND condition2, ... */
+ORDER BY magnitude DESC  /* ORDER BY columni (ASC | DESC) */
+LIMIT 1;  /* LIMIT n;  number of rows   */
+
+
+
+
+/* 1. Retrieving Data From All Columns */
+
+SELECT *
+FROM animal;
+/* 2. Retrieving Data From Certain Columns */
+
+SELECT id, name
+FROM animal;
+/* 3. Filtering Data Using WHERE Clause */
+
+SELECT id, name, age
+FROM animal
+WHERE age>=2;
+/* 4. Filtering Data Using Conditions Joined by AND Operator */
+
+SELECT id, name, age 
+FROM animal
+WHERE age >= 2 AND name = 'dog';
+/* 5. Filtering Data Using Conditions Joined by OR Operator */
+
+SELECT id, name, age 
+FROM animal
+WHERE age >= 2 OR name = 'dog';
+/* 6. Using DISTINCT to Retrieve Non-Repeated Records */
+
+SELECT DISTINCT name, color
+FROM clothing;
+/* 7. Retrieving Data Without NULL in a Certain Column */
+
+SELECT name, color
+FROM clothing
+WHERE color IS NOT NULL;
+/* 8. Sorting Data According to One Column */
+
+SELECT id, name
+FROM animal
+ORDER BY name;
+/* 9. Sorting Data According to More Than One Column */
+
+SELECT id, name
+FROM animal
+ORDER BY name DESC, id;
+/* 10. Searching for Values Matching a Certain Pattern */
+
+SELECT id, name
+FROM animal
+WHERE name LIKE '%e%';
+/* 11. Joining Values From Text Columns Into One String */
+
+SELECT CONCAT(category, ' ', name) 
+FROM tab;
+/* 12. Using Mathematical Operators */
+
+SELECT price - discount
+FROM product;
+/* 13. Adding Data From Different Tables */
+
+SELECT last_name FROM customer
+UNION ALL
+SELECT last_name FROM employee;
+/* 14. Finding the Intersection of Sets of Data */
+
+SELECT last_name FROM customer
+INTERSECT
+SELECT last_name FROM employee;
+
+/* 15. Joining Data From Different Tables */
+
+SELECT customer.last_name, city.name
+FROM customer
+INNER JOIN city 
+  ON customer.id = city.customer_id;
+
+/* 16. Using Aliases of Tables and Columns */
+
+SELECT c.last_name AS lname, t.name AS city
+FROM customer AS c
+INNER JOIN city AS t
+  ON c.id = t.customer_id;
+
+/* 17. Counting the Number of Rows in a Table */
+
+SELECT COUNT(id)
+FROM product;
+
+/* 18. Calculating the Average of the Values in a Column */
+
+SELECT AVG(price)
+FROM product;
+
+/* 19. Calculating the Sum of the Values in a Column */
+
+SELECT SUM(price)
+FROM product;
+
+/* 20. Finding the Minimum Value in a Column */
+
+SELECT MIN(price)
+FROM product;
+
+/* 21. Finding the Maximum Value in a Column */
+
+SELECT MAX(price)
+FROM product;
+
+/* 22. Calculating the Aggregate Value for Groups of Records */
+
+SELECT category, COUNT(id)
+FROM product
+GROUP BY category;
+
+/* 23. Filtering Rows Using Aggregate Functions */
+
+SELECT category, AVG(price)
+FROM product
+GROUP BY category
+HAVING AVG(price) < 56.50;
+
+/* 24. Removing Data From a Table */
+
+DELETE FROM product;
+
+/* 25. Removing Records Meeting a Certain Condition From a Table */
+
+DELETE FROM product
+WHERE id = 5;
+
+/* 26. Inserting Data Into a Table */
+
+INSERT INTO product(id, name, category) 
+VALUES(25, 'sofa', 'furniture');
+
+/* 27. Updating a Column in a Table */
+
+UPDATE product SET company = 'ABC';
+
+/* 28. Updating a Column by Filtering Records */
+
+UPDATE product
+SET name = 'armchair'
+WHERE id = 25;
+
+/* 29. Creating a Table */
+
+CREATE TABLE tab(id int, name varchar(50));
+
+/* 30. Deleting a Table */
+
+DROP TABLE tab;
+
+
+/* JOINING TABLES */
+
+SELECT *
+FROM martian
+INNER JOIN base
+ON martian.base_id = base.base_id;
+
+SELECT martian.martian_id, base.base_id, base.base_name
+FROM martian
+INNER JOIN base
+ON martian.base_id = base.base_id;
+
+SELECT column1, column2, ...
+FROM martian
+(INNER / RIGHT / LEFT / FULL) JOIN base
+ON martian.base_id = base.base_id
+WHERE condition(s)
+ORDER BY value
 
 
 
