@@ -38,6 +38,8 @@ logreg.score(x_test, y_test)
 """
 0.9596774193548387
 """
+weights = logreg.coef_
+
 
 
 """ usefull indicator names used in database and their turkish translations here below
