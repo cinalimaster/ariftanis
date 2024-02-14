@@ -10,7 +10,7 @@ open windows powershell and execute this command
 detailed information at [christitus.com](https://christitus.com/debloat-windows-10-2020/)
 
 ```bash
-   iwr -useb https://christitus.com/win | iex
+iwr -useb https://christitus.com/win | iex
   ```
 
 <img src="https://c7.alamy.com/comp/WK9XY3/student-girl-studying-at-school-WK9XY3.jpg" alt="study" width="200"/>
